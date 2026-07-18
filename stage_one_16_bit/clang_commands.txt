@@ -1,0 +1,1 @@
+clang -m16 -Os -nostdlib -no-pie -fomit-frame-pointer -ffreestanding -nostartfiles -mno-red-zone -fuse-ld=lld -T ../stage_one_linker.ld -target i386-unknown-none-code16 main.c

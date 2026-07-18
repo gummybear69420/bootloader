@@ -1,0 +1,1 @@
+llvm-objcopy -I elf32-i386 -O binary a.out a.bin
