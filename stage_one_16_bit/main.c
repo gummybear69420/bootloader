@@ -1,17 +1,29 @@
-// test 
-
+/*
+ * A naked function has no function prologe and simply acts as an assembly label. This is a little hack to re-create the global_asm!() macro from rust. 
+ * */
 #define _hacked_function void __attribute((naked, section(".text")))
 
-#define VGA_MEMORY 0xB800
-
+/*
+ * Beggining of the bootstrap assembly. 
+ * */
 _hacked_function _asm_entry(){
 	__asm__ __volatile__(R"(
 		.code16
 
+		/*
+		 * clears the code segment register, sometimes full of garbage
+		 * */
 		ljmp $0, $_clear_cs_reg
 
 		_clear_cs_reg: 
 		
+		/*
+		 * Clearing all the registers 
+		 * */
+		xor %ax, %ax
+		mov %
+			
+		/* Sanity check */	
 		movb $0x0E, %ah 
 		movb $'h', %al 
 		int $0x10
@@ -21,10 +33,7 @@ _hacked_function _asm_entry(){
 }
 
 void _c_entry(){
-	volatile int* vga_buffer = (volatile int*)VGA_MEMORY;
-	while(1){
-		*vga_buffer= (unsigned int)0x0F68;
-	}; 
+	while(1); 
 }
 
 
